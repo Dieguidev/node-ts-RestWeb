@@ -1,0 +1,13 @@
+node_modules/
+dist/
+outputs/
+*.log
+logs/
+
+coverage/
+test-destination/
+
+.env
+
+mongo/
+postgres/
