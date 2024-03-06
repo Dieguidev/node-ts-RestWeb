@@ -29,7 +29,7 @@ export class Server {
 
 
     this.app.get('*', (req, res) => {
-      const indexPath = path.join(__dirname + `../../${this.publicPath}/index.html`);
+      const indexPath = path.join(__dirname + `../../../${this.publicPath}/index.html`);
       res.sendFile(indexPath);
     })
 
