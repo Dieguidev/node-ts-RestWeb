@@ -1,13 +1,12 @@
-import http from 'http';
+import { Server } from "./presentation/server";
 
 
-const server = http.createServer((req, res) => {
-  console.log(req.url);
+(() => {
+  main();
+})();
 
-  res.write('Hola mundo')
-  res.end();
-});
+function main() {
+  const server = new Server();
+  server.start();
 
-server.listen(8080, ()=>{
-  console.log('Server is running on port 8080');
-});
+}
