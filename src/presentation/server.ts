@@ -26,7 +26,7 @@ export class Server {
 
     //*middlewares
     this.app.use(express.json());
-    // sirve para activar las urlencoded que podrian ser peticiones de angular
+    // sirve para activar las x-www-form-urlencoded que podrian ser peticiones de angular
     this.app.use(express.urlencoded({ extended: true }));
 
     //* public folder
