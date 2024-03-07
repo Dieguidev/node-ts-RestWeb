@@ -25,7 +25,9 @@ export class Server {
   async start() {
 
     //*middlewares
-
+    this.app.use(express.json());
+    // sirve para activar las urlencoded que podrian ser peticiones de angular
+    this.app.use(express.urlencoded({ extended: true }));
 
     //* public folder
     this.app.use(express.static(this.publicPath));
