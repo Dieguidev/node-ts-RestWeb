@@ -36,9 +36,6 @@ export class TodosController {
     const [error, createTodoDto] = CreateTodoDto.create(req.body);
     if (error) return res.status(400).json({ error });
 
-    console.log(createTodoDto);
-
-
     const newTodo = await prisma.todo.create({
       data: createTodoDto!
     })
