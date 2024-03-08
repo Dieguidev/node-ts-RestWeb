@@ -1,7 +1,8 @@
 import { Request, Response } from "express";
 import { prisma } from "../../data/postgresql";
-import { CreateTodoDto } from "../../domain/dtos";
-import { log } from "console";
+import { CreateTodoDto, UpdateTodoDto } from "../../domain/dtos";
+
+
 
 const todos = [
   { id: 1, text: 'Todo 1', completedAt: new Date() },
@@ -49,21 +50,20 @@ export class TodosController {
 
   public updateTodo = async (req: Request, res: Response) => {
     const { id } = req.params;
-
-    if (!Number(id)) return res.status(400).json({ error: 'ID argument is not a number' });
+    const [error, updateTodoDto] = UpdateTodoDto.create({
+      ...req.body,
+      id: Number(id)
+    });
+    if (error) return res.status(400).json({ error });
 
     const todo = await prisma.todo.findFirst({ where: { id: Number(id) } });
     if (!todo) return res.status(404).json({ error: `Todo with id ${id} not found` });
-
-    const { text, completedAt } = req.body;
 
     const updatedTodo = await prisma.todo.update({
       where: {
         id: Number(id)
       },
-      data: {
-        text, completedAt
-      }
+      data: updateTodoDto!.values
     })
 
     // if (!text) return res.status(400).json({ error: 'Text argument is required' });
@@ -84,6 +84,6 @@ export class TodosController {
       }
     })
 
-    res.json({todo, deleted});
+    res.json({ todo, deleted });
   }
 }
