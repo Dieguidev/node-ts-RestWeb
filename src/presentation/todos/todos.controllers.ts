@@ -1,6 +1,7 @@
 import { Request, Response } from "express";
 import { prisma } from "../../data/postgresql";
 import { CreateTodoDto, UpdateTodoDto } from "../../domain/dtos";
+import { TodoDatasourceImpl } from "../../infrastructure/datasource/todo.datasource.impl";
 
 
 
@@ -11,10 +12,13 @@ const todos = [
 ]
 
 export class TodosController {
-  constructor() { }
+  constructor(
+    // private readonly todoDatasourceImpl: TodoDatasourceImpl,
+  ) { }
 
   public getAllTodos = async (req: Request, res: Response) => {
     const todos = await prisma.todo.findMany();
+    // const todos = this.todoDatasourceImpl.getAll();
     res.json(todos);
   }
 
