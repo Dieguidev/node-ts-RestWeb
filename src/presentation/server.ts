@@ -1,4 +1,5 @@
 import express, { Router } from 'express';
+import compression from 'compression';
 import path from 'path';
 
 interface Options {
@@ -28,6 +29,8 @@ export class Server {
     this.app.use(express.json());
     // sirve para activar las x-www-form-urlencoded que podrian ser peticiones de angular
     this.app.use(express.urlencoded({ extended: true }));
+    //esta linea es para mejorar respuestas del servidor
+    this.app.use(compression)
 
     //* public folder
     this.app.use(express.static(this.publicPath));
