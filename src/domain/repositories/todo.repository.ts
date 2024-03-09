@@ -12,7 +12,7 @@ export abstract class TodoRepository {
 
   abstract getById(id: number): Promise<TodoEntity>;
 
-  abstract update(id: number, updateTodoDto: UpdateTodoDto): Promise<TodoEntity>;
+  abstract update(updateTodoDto: UpdateTodoDto): Promise<TodoEntity>;
 
   abstract delete(id: number): Promise<TodoEntity>;
 

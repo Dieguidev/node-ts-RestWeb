@@ -20,15 +20,16 @@ export class TodoDatasourceImpl implements TodoDatasource {
 
 
   async getById(id: number): Promise<TodoEntity> {
+    if (!Number(id)) throw('ID argument is not a number');
     const todo = await prisma.todo.findFirst({ where: { id: Number(id) } });
 
-    if (!todo) throw new Error(`Todo with id ${id} not found`);
+    if (!todo) throw (`Todo with id ${id} not found`);
 
     return TodoEntity.fromObject(todo);
   }
 
 
-  async update(id: number, updateTodoDto: UpdateTodoDto): Promise<TodoEntity> {
+  async update(updateTodoDto: UpdateTodoDto): Promise<TodoEntity> {
     await this.getById(updateTodoDto.id);
 
     const updatedTodo = await prisma.todo.update({

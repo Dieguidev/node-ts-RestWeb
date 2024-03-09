@@ -18,8 +18,8 @@ export class TodoRepositoryImpl implements TodoRepository {
   getById(id: number): Promise<TodoEntity> {
     return this.datasource.getById(id);
   }
-  update(id: number, updateTodoDto: UpdateTodoDto): Promise<TodoEntity> {
-    return this.datasource.update(id, updateTodoDto);
+  update(updateTodoDto: UpdateTodoDto): Promise<TodoEntity> {
+    return this.datasource.update(updateTodoDto);
   }
   delete(id: number): Promise<TodoEntity> {
     return this.datasource.delete(id);
